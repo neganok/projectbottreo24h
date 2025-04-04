@@ -7,7 +7,7 @@ from pytz import timezone
 from html import escape
 
 CONFIG_FILE,METHODS_FILE='config2.json','methods.json'
-BOT_ACTIVE,user_processes=True,{}
+BOT_ACTIVE,user_processes=True,{} 
 
 # Hàm load dữ liệu từ file JSON
 def load_json(f):return json.load(open(f,'r'))if os.path.exists(f)else save_json(f,{})or{}
