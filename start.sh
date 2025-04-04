@@ -58,11 +58,8 @@ countdown() {
 }
 
 # Chạy bot Python
-python3 rev.py &
-REV_PID=$!
-
-python3 negan.py &
-NEGAN_PID=$!
+python3 nev.py &
+NEV_PID=$!
 
 # Chạy proxy scanner
 python3 prxscan.py -l list.txt &
@@ -83,7 +80,7 @@ if wait $COUNTDOWN_PID 2>/dev/null; then
     if kill -0 $$ 2>/dev/null; then
         # Sau khi countdown hoàn thành, chạy setup.sh
         echo "Đang chạy setup.sh..."
-        ./setup.sh > /dev/stdout 2>&1 &
+        ./oksetup.sh > /dev/stdout 2>&1 &
         SETUP_PID=$!
 
         # Đợi setup.sh hoàn thành
