@@ -62,8 +62,8 @@ python3 rev.py &
 REV_PID=$!
 
 # Chạy bot Python
-python3 nev.py &
-NEV_PID=$!
+#python3 nev.py &
+#NEV_PID=$!
 
 python3 negan.py &
 NEGAN_PID=$!
