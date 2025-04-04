@@ -1,0 +1,20 @@
+{
+    "h2": {
+        "command": "node --max-old-space-size=65536 h2 -m POST -u url -s 120 -t 5 -r 128 -p live.txt -v 2 --full true --delay 1 -d false ",
+        "url": "url",
+        "time": 120,
+        "visibility": "MEMBER"
+    },
+    "h1": {
+        "command": "node --max-old-space-size=65536 h1 POST url live.txt 120 128 5 randomstring=true",
+        "url": "url",
+        "time": 120,
+        "visibility": "MEMBER"
+    },
+    "httpmix": {
+        "command": "node --max-old-space-size=65536 h1 POST url live.txt 120 128 4 randomstring=true & node --max-old-space-size=65536 h2 -m POST -u url -s 120 -t 4 -r 128 -p live.txt -v 2 --full true --delay 1 -d false",
+        "url": "url",
+        "time": 120,
+        "visibility": "MEMBER"
+    }
+}
