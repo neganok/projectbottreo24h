@@ -13,7 +13,7 @@ COUNT=1
 pause_resume_service() {
   echo "Lần thứ $COUNT: Tạm dừng và resume dịch vụ wrong-alexia/setup..."
   koyeb service pause wrong-alexia/setup
-  wait
+  sleep 60
   koyeb service resume wrong-alexia/setup
   ((COUNT++))
 }
