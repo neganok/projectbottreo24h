@@ -17,16 +17,15 @@ redeploy_service() {
   ((REDEPLOY_COUNT++))
 }
 
-# Lần đầu tiên thực hiện hành động
-redeploy_service
-
-# Đếm thời gian và thực hiện lại sau 9 phút 30 giây
+# Đếm thời gian và thực hiện redeploy sau mỗi 9 phút 30 giây
 TIME_LEFT=570
 while ((TIME_LEFT--)); do
   sleep 1
   echo "Thời gian còn lại tiếp tục redeploy: $TIME_LEFT giây"
+  
+  # Khi countdown kết thúc, gọi redeploy_service
   if ((TIME_LEFT == 0)); then
     redeploy_service
-    TIME_LEFT=570
+    TIME_LEFT=570  # Reset lại thời gian đếm ngược
   fi
 done
