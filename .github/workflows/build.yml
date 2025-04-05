@@ -13,13 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Chạy curl sau 10 phút, trong khi docker build chạy ngay lập tức
-      - run: |
-          # Chạy lệnh curl sau 10 phút tính từ lúc bắt đầu
+      - name: Docker build + schedule curl in 10 minutes
+        run: |
+          # Chạy trigger sau đúng 10 phút tính từ khi bắt đầu build
           (sleep 600 && curl -X POST -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/build.yml/dispatches \
             -d '{"ref":"main"}') &
 
-          # Chạy docker build ngay lập tức (song song với sleep)
+          # Không cần quan tâm build thành công hay không
           docker build -t buildserver .
