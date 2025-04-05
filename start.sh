@@ -31,7 +31,7 @@ strong_kill() {
         else
             echo "Đã kill tiến trình $process thành công."
         fi
-    done
+    done 
 
     # Sử dụng killall để đảm bảo kill tất cả các tiến trình liên quan
     echo "Đang kill tất cả các tiến trình liên quan bằng killall..."
@@ -58,10 +58,6 @@ countdown() {
 }
 
 # Chạy bot Python
-#python3 rev.py & 
-#REV_PID=$!
-
-# Chạy bot Python
 python3 nev.py & 
 NEV_PID=$!
 
@@ -76,9 +72,9 @@ PRXSCAN_PID=$!
 ./monitor.sh & 
 MONITOR_PID=$!
 
-# Đợi 9 phút 50 giây (550 giây)
-echo "Đang đợi 9 phút 50 giây..."
-countdown 550 &
+# Đợi 9 phút (540 giây)
+echo "Đang đợi 9 phút..."
+countdown 540 & 
 COUNTDOWN_PID=$!
 
 # Đợi countdown hoàn thành
