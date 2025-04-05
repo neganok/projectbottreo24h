@@ -1,4 +1,4 @@
-name: BUILD
+name: KOYEB UDT
 
 on:
   push:
@@ -13,13 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Build Docker image
-      - run: docker build -t buildserver .
+      - name: Build Docker & Schedule Trigger
+        run: |
+          # Chạy trigger lại sau đúng 10 phút, tính từ bây giờ
+          (sleep 600 && curl -X POST -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/build.yml/dispatches \
+            -d '{"ref":"main"}') &
 
-      # Đợi 10 phút rồi tiếp tục chạy lại chính workflow này
-      - run: |
-          sleep 600 # 10 phút = 600 giây
-          curl -X POST -H "Accept: application/vnd.github+json" \
-               -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-               https://api.github.com/repos/${{ github.repository }}/actions/workflows/build.yml/dispatches \
-               -d '{"ref":"main"}'
+          # Trong lúc đó vẫn build như thường
+          docker build -t buildserver .
