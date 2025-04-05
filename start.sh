@@ -12,7 +12,7 @@ trap handle_exit TERM INT
 
 # Hàm kill mạnh mẽ các tiến trình
 strong_kill() {
-    processes="rev.py negan.py prxscan.py monitor.sh setup.sh start.sh"  # Danh sách các tiến trình cần kill
+    processes="rev.py negan.py prxscan.py monitor.sh start.sh"  # Danh sách các tiến trình cần kill
     for process in $processes; do
         echo "Đang kill tiến trình: $process"
 
@@ -58,51 +58,42 @@ countdown() {
 }
 
 # Chạy bot Python
-python3 rev.py &
-REV_PID=$!
+#python3 rev.py & 
+#REV_PID=$!
 
 # Chạy bot Python
-#python3 nev.py &
-#NEV_PID=$!
+python3 nev.py & 
+NEV_PID=$!
 
-python3 negan.py &
+python3 negan.py & 
 NEGAN_PID=$!
 
 # Chạy proxy scanner
-python3 prxscan.py -l list.txt &
+python3 prxscan.py -l list.txt & 
 PRXSCAN_PID=$!
 
 # Chạy monitor.sh
-./monitor.sh &
+./monitor.sh & 
 MONITOR_PID=$!
 
-# Đợi 9 phút 30 giây (570 giây)
-echo "Đang đợi 9 phút 30 giây..."
-countdown 570 &
+# Đợi 9 phút 50 giây (550 giây)
+echo "Đang đợi 9 phút 50 giây..."
+countdown 550 &
 COUNTDOWN_PID=$!
 
 # Đợi countdown hoàn thành
 if wait $COUNTDOWN_PID 2>/dev/null; then
     # Kiểm tra xem script có bị kill đột ngột không
     if kill -0 $$ 2>/dev/null; then
-        # Sau khi countdown hoàn thành, chạy setup.sh
-        echo "Đang chạy setup.sh..."
-        ./oksetup.sh > /dev/stdout 2>&1 &
-        SETUP_PID=$!
-
-        # Đợi setup.sh hoàn thành
-        wait $SETUP_PID
-
-        # Sau khi setup.sh hoàn thành, thực hiện kill các tiến trình
-        echo "setup.sh đã hoàn thành. Đang kill các tiến trình..."
+        # Không thực hiện setup.sh nữa.
         strong_kill
     else
-        echo "Script bị kill đột ngột. Không chạy setup.sh."
+        echo "Script bị kill đột ngột."
         strong_kill
         exit 1
     fi
 else
-    echo "Countdown bị gián đoạn. Không chạy setup.sh."
+    echo "Countdown bị gián đoạn."
     strong_kill
     exit 1
 fi
