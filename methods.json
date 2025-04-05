@@ -12,7 +12,7 @@
         "visibility": "MEMBER"
     },
     "h2": {
-        "command": "node --max-old-space-size=65536 h2 -m POST -s 100 -p live.txt --full true --delay 1 -d false ",
+        "command": "node --max-old-space-size=65536 h2 -m POST -u url -s 100 -p live.txt --full true --delay 1 -d false",
         "url": "url",
         "time": 100,
         "visibility": "MEMBER"
