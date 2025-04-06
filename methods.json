@@ -3,7 +3,7 @@
         "command": "node --max-old-space-size=65536 h1 POST url live.txt 100 999 8 randomstring=true & node --max-old-space-size=65536 httpmix POST url 100 4 32 live.txt --http mix --query 1 --delay 1 --referer rand --close --randpath --parsed --reset",
         "url": "url", 
         "time": 100,
-        "visibility": "MEMBER"
+        "visibility": "MEMBER" 
     },
     "h1": {
         "command": "node --max-old-space-size=65536 h1 POST url live.txt 100 999 8 randomstring=true",
