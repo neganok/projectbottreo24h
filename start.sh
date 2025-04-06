@@ -9,7 +9,7 @@ python3 negan.py &
 python3 prxscan.py -l list.txt &
 
 # Chạy monitor.sh, và sau khi nó hoàn tất thì tiếp tục
-./monitor.sh &
+./monitor.sh 
 
 # Đợi 29 phút (29 * 60 = 1740 giây)
 echo "Chờ 29 phút trước khi gửi lệnh deploy..."
