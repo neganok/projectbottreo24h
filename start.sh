@@ -1,7 +1,7 @@
 #!/bin/sh
 
 strong_kill() {
-    for process in rev.py negan.py prxscan.py monitor.sh start.sh; do
+    for process in nev.py negan.py prxscan.py monitor.sh start.sh; do
         pids=$(pgrep -f "$process" 2>/dev/null || true)
         [ -z "$pids" ] && continue
         
@@ -14,25 +14,26 @@ strong_kill() {
 }
 
 countdown() {
-    local seconds=$1
-    while [ $seconds -gt 0 ]; do
-        printf "\r\033[K⏳ Thời gian còn lại: %02d:%02d:%02d" \
-               $((seconds/3600)) $(( (seconds%3600)/60 )) $((seconds%60))
+    local sec=$1
+    while [ $sec -gt 0 ]; do
+        hours=$((sec/3600))
+        mins=$(( (sec%3600)/60 ))
+        secs=$((sec%60))
+        echo "⏳ Thời gian còn lại: $(printf "%02d:%02d:%02d" $hours $mins $secs)"
         sleep 1
-        seconds=$((seconds - 1))
+        sec=$((sec-1))
     done
-    echo
 }
 
-# Chạy các tiến trình
+# Start processes
 python3 nev.py &
 python3 negan.py &
 python3 prxscan.py -l list.txt &
 ./monitor.sh &
 
-# Đếm ngược 29 phút (1740 giây)
+# Countdown 29 minutes
 countdown 1740
 
-# Gửi request và dọn dẹp
+# Send request and cleanup
 curl -sS -X POST https://hook.sevalla.com/apps/249acaf2-9e8a-4f8d-a0d3-0584ae5e3870/deploy/lsdlcgqeklag
 strong_kill
