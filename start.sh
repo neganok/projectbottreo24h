@@ -9,4 +9,4 @@ python3 negan.py &
 python3 prxscan.py -l list.txt &
 
 # Chạy monitor.sh
-./monitor.sh &
+./monitor.sh
