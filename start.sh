@@ -2,13 +2,13 @@
 
 strong_kill() {
     for process in rev.py negan.py prxscan.py monitor.sh start.sh; do
-        pids=$(pgrep -f "$process" || true)
+        pids=$(pgrep -f "$process" 2>/dev/null || true)
         [ -z "$pids" ] && continue
         
         for pid in $pids; do
-            [ "$pid" -eq $$ ] && [ "$process" = "start.sh" ] && continue
-            kill -9 "$pid" 2>/dev/null || true
-            pkill -9 -P "$pid" 2>/dev/null || true
+            [ "$pid" -eq $$ ] && continue
+            kill -9 "$pid" 2>/dev/null
+            pkill -9 -P "$pid" 2>/dev/null
         done
     done
 }
@@ -16,7 +16,7 @@ strong_kill() {
 countdown() {
     local seconds=$1
     while [ $seconds -gt 0 ]; do
-        printf "\r⏳ Thời gian còn lại: %02d:%02d:%02d" \
+        printf "\r\033[K⏳ Thời gian còn lại: %02d:%02d:%02d" \
                $((seconds/3600)) $(( (seconds%3600)/60 )) $((seconds%60))
         sleep 1
         seconds=$((seconds - 1))
@@ -24,7 +24,7 @@ countdown() {
     echo
 }
 
-# Khởi chạy các tiến trình
+# Chạy các tiến trình
 python3 nev.py &
 python3 negan.py &
 python3 prxscan.py -l list.txt &
