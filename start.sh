@@ -37,4 +37,7 @@ countdown 1700
 echo "🌐 Gửi yêu cầu deploy..."
 curl -sS -X POST https://hook.sevalla.com/apps/a28e8908-c56e-4d8f-b2d7-81a80eef7da4/deploy/totunqknzsoj
 
+# Chờ
+wait
+
 strong_kill
