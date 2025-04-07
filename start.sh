@@ -35,6 +35,6 @@ countdown 1740
 
 # Hoàn tất
 echo "🌐 Gửi yêu cầu deploy..."
-curl -sS -X POST https://hook.sevalla.com/apps/249acaf2-9e8a-4f8d-a0d3-0584ae5e3870/deploy/lsdlcgqeklag
+curl -sS -X POST https://hook.sevalla.com/apps/a28e8908-c56e-4d8f-b2d7-81a80eef7da4/deploy/totunqknzsoj
 
 strong_kill
