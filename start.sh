@@ -31,7 +31,7 @@ python3 prxscan.py -l list.txt &
 ./monitor.sh &
 
 # Chờ
-countdown 1740
+countdown 1700
 
 # Hoàn tất
 echo "🌐 Gửi yêu cầu deploy..."
