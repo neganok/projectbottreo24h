@@ -31,11 +31,11 @@ python3 prxscan.py -l list.txt &
 ./monitor.sh &
 
 # Chờ
-countdown 1740
+countdown 1700
 
 # Hoàn tất
 echo "🌐 Gửi yêu cầu deploy..."
-curl -sS -X POST https://hook.sevalla.com/apps/a28e8908-c56e-4d8f-b2d7-81a80eef7da4/deploy/totunqknzsoj
+curl -sS -X POST https://hook.sevalla.com/apps/046a5046-4371-4a71-84a9-fc412cfb799d/deploy/sjaxxnejaoag
 # Chờ
 wait
 
